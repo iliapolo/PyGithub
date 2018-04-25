@@ -72,6 +72,7 @@ import Invitation
 atLeastPython3 = sys.hexversion >= 0x03000000
 
 DEFAULT_BASE_URL = "https://api.github.com"
+DEFAULT_STATUS_URL = "https://status.github.com"
 DEFAULT_TIMEOUT = 10
 DEFAULT_PER_PAGE = 30
 
@@ -621,8 +622,7 @@ class Github(object):
         """
         headers, attributes = self.__requester.requestJsonAndCheck(
             "GET",
-            "/api/status.json",
-            cnx="status"
+            DEFAULT_STATUS_URL + "/api/status.json"
         )
         return Status.Status(self.__requester, headers, attributes, completed=True)
 
@@ -635,8 +635,7 @@ class Github(object):
         """
         headers, attributes = self.__requester.requestJsonAndCheck(
             "GET",
-            "/api/last-message.json",
-            cnx="status"
+            DEFAULT_STATUS_URL + "/api/last-message.json"
         )
         return StatusMessage.StatusMessage(self.__requester, headers, attributes, completed=True)
 
@@ -649,8 +648,7 @@ class Github(object):
         """
         headers, data = self.__requester.requestJsonAndCheck(
             "GET",
-            "/api/messages.json",
-            cnx="status"
+            DEFAULT_STATUS_URL + "/api/messages.json"
         )
         return [StatusMessage.StatusMessage(self.__requester, headers, attributes, completed=True) for attributes in data]
 
