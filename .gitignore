@@ -44,3 +44,5 @@
 /gh-pages/
 /doc/doctrees/
 .vscode*
+
+*.iml
